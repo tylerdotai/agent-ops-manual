@@ -189,6 +189,47 @@ When you need results from multiple independent sources:
 
 ---
 
+## Claude Code Tool Categories (Industry Standard)
+
+Anthropic's Claude Code uses 5 categorized tool types. This is the reference for what proper tool classification looks like:
+
+### 1. Read Tools
+Reading files, searching content, inspecting system state.
+- Read files (partial or full)
+- Search across files
+- Inspect directory structure
+- Check file existence and metadata
+
+### 2. Edit Tools
+Making targeted changes without rewriting entire files.
+- Edit (search/replace in specific sections)
+- Insert (add new content at specific locations)
+- Remove (delete specific sections)
+
+### 3. Write Tools
+Creating new files or overwriting existing ones.
+- Write (create or overwrite)
+- Mkdir (create directories)
+- Tmp files for intermediate outputs
+
+### 4. Action Tools
+Running commands, executing code, interacting with external systems.
+- Bash/shell commands
+- Running scripts
+- Running tests
+- Building and deploying
+
+### 5. Agent Tools
+Coordinating other agents, managing sessions.
+- Spawn subagent
+- Send between sessions
+- Collect results
+- Kill orphaned sessions
+
+**Key insight:** The most capable agents don't just give you tools — they give you the right tool for each situation, in the right order, with proper error recovery.
+
+---
+
 ## Security Considerations
 
 ### What to Never Do with Tools
