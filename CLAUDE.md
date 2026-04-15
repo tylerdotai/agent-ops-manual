@@ -38,3 +38,16 @@ This repo documents how to build an AI agent that:
 ## Contributing
 
 If you find issues or improvements, open an issue or PR. This is meant to be a living document of best practices.
+
+## External Sources
+
+This manual draws from industry-standard agent systems:
+
+| Source | What it contributed |
+|---|---|
+| `AGENTS.md` community standard | Minimal, machine-readable format used by 60k+ repos |
+| Claude Code system prompt | 5-tool-category pattern (Read/Edit/Write/Action/Agent) |
+| shipshitdev/skills | Real skill integrations for Claude/Cursor/Codex |
+| Cursor agent tools | Detailed tool definitions with security patterns |
+
+See TOOLS.md and SKILLS.md for specifics.

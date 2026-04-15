@@ -170,10 +170,40 @@ When a skill stops being useful: archive it (move to `archived/`), don't just de
 
 Before a skill is "done":
 
-- [ ] SKILL.md exists with name, description, workflow
+- [ ] SKILL.md exists with name, description, workflow, trigger conditions
 - [ ] Workflow steps are specific and automatable
 - [ ] Script files are executable and error-handled
+- [ ] References/ directory exists with relevant docs (selectors, patterns, etc.)
+- [ ] Init script (`init.py`) verifies dependencies before use
 - [ ] Cron entry exists if scheduled
 - [ ] Output goes to the right place
 - [ ] Tested end-to-end
+- [ ] Exit codes defined: 0=success, 1=usage, 2=error
 - [ ] Documented in the skill file how to invoke it
+
+---
+
+## Industry Reference: Proper Skill Structure
+
+The best agent skill systems (参考 shipshitdev/skills, Cursor agent tools) use this structure:
+
+```
+skill-name/
+├── SKILL.md              # Frontmatter + workflow + trigger conditions
+├── scripts/
+│   ├── init.py          # Dependency check (exit 0=ready, 1=not ready)
+│   ├── <operation>.py   # One focused script per operation
+│   └── <operation>.py
+├── references/
+│   ├── selectors.md     # CSS/XPath selector reference
+│   └── patterns.md      # Common workflow patterns
+└── examples/
+    └── example-usage.md  # Real usage examples
+```
+
+**Key principles:**
+- One script per operation, not one mega-script
+- init.py always runs first to verify the environment
+- Exit codes are specific: 0=success, 1=usage error, 2=dependency error
+- References are actual docs, not just comments
+- Scripts return JSON, not unstructured text
