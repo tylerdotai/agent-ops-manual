@@ -14,11 +14,42 @@ An agent typically has access to:
 | file read/write/edit | Working with files |
 | web search | Research, finding URLs, fact-checking |
 | web fetch | Pulling content from URLs |
+| browser automation | JS-rendered pages, interaction, screenshots |
 | image analysis | Understanding images |
 | image generation | Creating images |
 | message | Sending messages to channels |
 | memory search | Semantic search over memory |
 | session management | Spawning subagents, sending between sessions |
+
+---
+
+## The Three-Layer Web Tool Framework
+
+For any web interaction task, use the right layer:
+
+### Layer 1 — Search (SearXNG)
+**What:** Find URLs and surface-level information
+**When:** First step for any research task
+**Output:** URLs, titles, snippets
+**Anti-pattern:** Skipping search to go straight to a specific URL
+
+### Layer 2 — Extract (web_fetch)
+**What:** Pull full content from known URLs
+**When:** After search gives you a URL to investigate
+**Output:** Markdown/text of the page
+**Anti-pattern:** Using extract on JS-heavy pages (returns empty/incomplete content)
+
+### Layer 3 — Interact (Browser)
+**What:** Full browser control — JS rendering, clicks, forms, screenshots
+**When:**
+- Page is JavaScript-rendered (extract returns garbage)
+- Need to interact with UI (login, search, click-through flows)
+- Need screenshots of page state
+- Multi-step flows requiring user interaction
+**Output:** Rendered HTML, screenshots, clicked state
+**Anti-pattern:** Using browser for static pages (wasteful and slow)
+
+**The order:** Search → Extract → Interact. Never skip to Layer 3 without trying Layers 1 and 2 first.
 
 ---
 
